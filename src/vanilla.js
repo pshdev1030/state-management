@@ -23,8 +23,14 @@ const createStore = (createState) => {
     listeners.clear();
   };
 
+  state = createState(setState, getState, clear);
+
   return {
     setState,
     getState,
+    subscribe,
+    clear,
   };
 };
+
+export default createStore;
