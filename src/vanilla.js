@@ -1,3 +1,5 @@
+import { is } from "./shallow";
+
 const createStore = (createState) => {
   let state;
   let listeners = new Set();
@@ -15,7 +17,18 @@ const createStore = (createState) => {
 
   const getState = () => state;
 
-  const subscribe = (subscribeFn) => {
+  const subscribeWithSelector = (
+    subscribeFn,
+    selectorFn = getState,
+    equlityFn = is
+  ) => {
+    return subscribeFn(state);
+  };
+
+  const subscribe = (subscribeFn, selectorFn, equalityFn) => {
+    if (selectorFn || equalityFn) {
+      console.log(subscribeWithSelector(state));
+    }
     listeners.add(subscribeFn);
   };
 
