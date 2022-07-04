@@ -7,3 +7,5 @@ useRef와 useReducer를 이용한 forceRender로 리액트에서도 사용 가�
 https://ui.toast.com/weekly-pick/ko_20210812
 
 https://github.com/pmndrs/zustand/blob/main/src/vanilla.ts
+
+https://github.com/reduxjs/react-redux/blob/147f1784cb4a6f826b520dbfcda9c85c2cf559ac/src/hooks/useSelector.ts
