@@ -1,4 +1,4 @@
-import { is } from "./shallow";
+import { is } from "./shallow.js";
 
 const createStore = (createState) => {
   let state;
@@ -22,14 +22,31 @@ const createStore = (createState) => {
     selectorFn = getState,
     equlityFn = is
   ) => {
-    return subscribeFn(state);
+    let curState = selectorFn(state);
+    // 클로저를 이용하여 이전 상태를 가둬둠
+
+    function subscribeSelector() {
+      let nextState = selectorFn(state);
+      if (!equlityFn(curState, nextState)) {
+        // selector로 조회해서 다를경우 이전 상태를 업데이트하고 함수를 반환
+        let prevState = curState;
+        curState = nextState;
+        subscribeFn(nextState, prevState);
+      }
+    }
+    listeners.add(subscribeSelector);
+    return () => listeners.delete(subscribeSelector);
+    // 나중에 api=subscribe(...); 해두고 api()로 초기화하기 위함
   };
 
   const subscribe = (subscribeFn, selectorFn, equalityFn) => {
     if (selectorFn || equalityFn) {
-      console.log(subscribeWithSelector(state));
+      listeners.add(subscribeWithSelector(state));
     }
     listeners.add(subscribeFn);
+
+    return () => listeners.delete(listener);
+    // 나중에 api=subscribe(...); 해두고 api()로 초기화하기 위함
   };
 
   const clear = () => {
