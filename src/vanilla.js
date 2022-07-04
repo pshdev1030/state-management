@@ -8,9 +8,7 @@ const createStore = (createState) => {
 
     if (nextState !== state) {
       const previousState = state;
-
       state = Object.assign({}, state, nextState);
-
       listeners.forEach((listener) => listener(state, previousState));
     }
   };
@@ -41,10 +39,9 @@ const createStore = (createState) => {
 
   const subscribe = (subscribeFn, selectorFn, equalityFn) => {
     if (selectorFn || equalityFn) {
-      listeners.add(subscribeWithSelector(state));
+      return subscribeWithSelector(subscribeFn, selectorFn, equalityFn);
     }
     listeners.add(subscribeFn);
-
     return () => listeners.delete(listener);
     // 나중에 api=subscribe(...); 해두고 api()로 초기화하기 위함
   };

@@ -6,9 +6,5 @@ const store = createStore((set) => ({
   removeAllBears: () => set({ bears: 0 }),
 }));
 
-const param1 = store.getState();
-console.log(param1);
-store.setState((state) => state.increasePopulation());
-const param2 = store.getState();
-console.log(param2);
-store.subscribe();
+store.subscribe((state) => console.log("update!"));
+store.setState((state) => state.increasePopulation);
