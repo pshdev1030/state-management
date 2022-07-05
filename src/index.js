@@ -1,2 +1,2 @@
-export * from "./vanilla";
-export * from "./shallow";
+export * from "./utils/shallow.js";
+export * from "./vanilla.js";
