@@ -1,4 +1,4 @@
-import createStore from "./vanilla.js";
+import createStore from "../src/vanilla.js";
 
 const store = createStore((set) => ({
   bears: 0,
@@ -9,5 +9,6 @@ const store = createStore((set) => ({
 store.subscribe((state) => console.log("update"));
 const increase = store.getState((state) => state.increasePopulation);
 
+increase();
 increase();
 increase();
