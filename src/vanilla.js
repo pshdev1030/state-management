@@ -13,7 +13,7 @@ const createStore = (createState) => {
     }
   };
 
-  const getState = () => state;
+  const getState = (selectorFn) => (selectorFn ? selectorFn(state) : state);
 
   const subscribeWithSelector = (
     subscribeFn,
