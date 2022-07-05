@@ -1,9 +1,10 @@
-import { is } from "./shallow.js";
+import { is } from "./utils/shallow.js";
 
 const createStore = (createState) => {
   let state;
   let listeners = new Set();
   const setState = (tool) => {
+    execIfFn(() => tool(state));
     const nextState = typeof tool === "function" ? tool(state) : tool;
 
     if (nextState !== state) {
