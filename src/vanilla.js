@@ -43,7 +43,7 @@ const createStore = (createState) => {
       return subscribeWithSelector(subscribeFn, selectorFn, equalityFn);
     }
     listeners.add(subscribeFn);
-    return () => listeners.delete(listener);
+    return () => listeners.delete(subscribeFn);
     // 나중에 api=subscribe(...); 해두고 api()로 초기화하기 위함
   };
 
